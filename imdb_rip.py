@@ -10,7 +10,7 @@ bottomMovies = ia.get_bottom100_movies()
 topShows = ia.get_top250_tv()
 
 #Create the SQL statements for the topMovies and Crew
-for mov in range(250):
+for mov in range(5):
     #Precisely selects the movie, writer, director, and cast
     movie = ia.get_movie(topMovies[mov].movieID)
     writer = ia.get_person(movie['writer'][0].personID)
@@ -84,7 +84,7 @@ for mov in range(250):
 print("Top Movies and Crew Written\n")
 
 #Create the SQL statements for the bottomMovies and Crew
-for mov in range(100):
+for mov in range(5):
     #Precisely selects the movie from the list
     movie = ia.get_movie(bottomMovies[mov].movieID)
     writer = ia.get_person(movie['writer'][0].personID)
@@ -92,7 +92,11 @@ for mov in range(100):
     cast = (movie['cast'])
 
     #Create the SQL statement to insert into media
-    out = "INSERT\nINTO Media(TitleID, Name, Rating, Budget, Synopsis, Country)\nVALUES(" + movie.movieID + ", \'" + movie['title'] + "\', \'" + str(movie['rating']) + "\', " + ''.join(c for c in movie['box office']['Budget'] if c.isnumeric()) + ", \'" + str(movie['plot'][0]) + "\', \'"+ str(movie["countries"][0]) + "\');\n\n"
+    try:
+        budget = ''.join(c for c in movie['box office']['Budget'] if c.isnumeric())
+    except KeyError:
+        budget = 'NULL'
+    out = "INSERT\nINTO Media(TitleID, Name, Rating, Budget, Synopsis, Country)\nVALUES(" + movie.movieID + ", \'" + movie['title'] + "\', \'" + str(movie['rating']) + "\', " + budget + ", \'" + str(movie['plot'][0]) + "\', \'"+ str(movie["countries"][0]) + "\');\n\n"
     file.write(out)
 
     #create the SQL statement to insert genre
@@ -110,16 +114,24 @@ for mov in range(100):
     file.write(out)
 
 #Insert the crew into people
-    #Insert Writer into person
-    out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['writer'][0]) + "\', " + "\'CONTACT\'" + ", " + writer['birth date'] + ", " + str(0b100) + ");\n\n"
+    #Insert WRiter into person
+    try:
+        writerDOB = writer["birth date"]
+    except KeyError:
+        writerDOB = "NULL"
+    out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['writer'][0]) + "\', " + "\'CONTACT\'" + ", " + writerDOB + ", " + str(0b100) + ");\n\n"
     file.write(out)
 
     #Insert Writer into Wrote
     out = "INSERT\nINTO Wrote(Writer_Name, Wrote_MediaID)\nVALUES(\'" + str(movie['writer'][0]) + "\', " + movie.movieID + ");\n\n"
     file.write(out)    
 
-    #Insert Director into Person        
-    out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['director'][0]) + "\', " + "\'CONTACT\'" + ", " + director['birth date'] + ", " + str(0b010) + ");\n\n"
+    #Insert Director into Person 
+    try:
+        directorDOB = director["birth date"]
+    except KeyError:
+        directorDOB = "NULL"        
+    out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['director'][0]) + "\', " + "\'CONTACT\'" + ", " + directorDOB + ", " + str(0b010) + ");\n\n"
     file.write(out)
 
     #Insert Director into Directed
@@ -131,7 +143,11 @@ for mov in range(100):
         actor = ia.get_person(cast[i].personID)
 
         #Insert Actor into Person
-        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES\'(" + str(cast[i]) + "\', " + "\'CONTACT\'" + ", " + actor['birth date'] + ", " + str(0b001) + ");\n\n"
+        try:
+            actorDOB = actor["birth date"]
+        except KeyError:
+            actorDOB = "NULL"
+        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES\'(" + str(cast[i]) + "\', " + "\'CONTACT\'" + ", " + actorDOB + ", " + str(0b001) + ");\n\n"
         file.write(out)
 
         #Insert Actor into Acted
@@ -140,14 +156,79 @@ for mov in range(100):
 print("Bottom Movies and Crew Written\n")
 
 #Create the SQL statements for the topShows and Crew
-for sho in range(2):
-    break
+for sho in range(5):
     #Precisely selects the movie from the list
     show = ia.get_movie(topShows[sho].movieID)
 
+    ia.update(show, 'episodes')
+    episode = ia.get_movie(show['episodes'][1][1].movieID)
+    
+    #create null variables if data isn't found
+    try:
+        budget = ''.join(c for c in show['box office']['Budget'] if c.isnumeric())
+    except KeyError:
+        budget = 'NULL'
+    
     #Create the SQL statement to insert into table
-    out = "INSERT\nINTO Media(TitleID, Name, Rating, Budget, Synopsis, Country)\nVALUES(" + show.movieID + ", \'" + show['title'] + "\', \'" + str(show['rating']) + "\', " + ''.join(c for c in movie['box office']['Budget'] if c.isnumeric()) + ", \'" + str(show['plot'][0]) + "\', " + str(show["countries"][0]) + "\')\n\n"
+    out = "INSERT\nINTO Media(TitleID, Name, Rating, Budget, Synopsis, Country)\nVALUES(" + show.movieID + ", \'" + show['title'] + "\', \'" + str(show['rating']) + "\', " + budget + ", \'" + str(show['plot'][0]) + "\', " + str(show["countries"][0]) + "\')\n\n"
     file.write(out)
+
+    #Create the SQL statement to insert into genre
+    for genre in movie['genres']:
+        out = "INSERT\nINTO Genre(Genre_MediaID, GenreName)\nVALUES(" + show.movieID + "," + genre + ");\n\n"
+        file.write(out)
+
+    #create the SQL statement to insert languages
+    for language in movie['languages']:
+        out = "INSERT\nINTO Languages(Language_MediaID, LanguageName)\nVALUES(" + show.movieID + ", \'" + language + "\');\n\n"
+        file.write(out)
+#Insert the crew into people
+    #Insert Writer into person
+    
+    try:
+        writer = ia.get_person(show['writer'][0].personID)
+
+        try:
+            writerDOB = writer["birth date"]
+        except KeyError:
+            writerDOB = "NULL"
+        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(" + str(show['writer'][0]) + ", " + "CONTACT" + ", " + writerDOB + ", " + str(0b100) + ");\n\n"
+        file.write(out)
+
+        #Insert Writer into Wrote
+        out = "INSERT\nINTO Wrote(Writer_Name, Wrote_MediaID)\nVALUES(" + str(show['writer'][0]) + ", " + show.movieID + ");\n\n"
+        file.write(out)    
+    except KeyError:
+        pass
+
+    try:
+        director = ia.get_person(show['director'][0].personID)
+
+        #Insert Director into Person        
+        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(" + str(show['director'][0]) + ", " + "CONTACT" + ", " + director['birth date'] + ", " + str(0b010) + ");\n\n"
+        file.write(out)
+
+        #Insert Director into Directed
+        out = "INSERT\nINTO Directed(Director_Name, Directed_MediaID)\nVALUES(" + str(show['director'][0]) + ", " + show.movieID + ");\n\n"
+        file.write(out)
+    except KeyError:
+        pass
+
+    #Insert top cast members
+    for i in range(2):
+        try:
+            cast = (show['cast'])
+            actor = ia.get_person(cast[i].personID)
+
+            #Insert Actor into Person
+            out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(" + str(cast[i]) + ", " + "CONTACT" + ", " + actor['birth date'] + ", " + str(0b001) + ");\n\n"
+            file.write(out)
+
+            #Insert Actor into Acted
+            out = "INSERT\nINTO Acted(Actor_Name, Acted_MediaID)\nVALUES(" + str(cast[i]) + ", " + show.movieID + ");\n\n"
+            file.write(out)
+        except KeyError:
+            pass
 print("Top Shows Written\n")
 
 #Close the file when complete with the statements

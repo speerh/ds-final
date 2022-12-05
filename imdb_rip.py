@@ -23,8 +23,11 @@ for mov in range(5):
     except KeyError:
         budget = 'NULL'
     
+    #create a plot variable to remove ' from the plot variable
+    movPlot = str(movie['plot'][0]).replace("'", "''")
+
     #Create the SQL statement to insert into media
-    out = "INSERT\nINTO Media(TitleID, Name, Rating, Budget, Synopsis, Country)\nVALUES(" + movie.movieID + ", \'" + movie['title'] + "\', \'" + str(movie['rating']) + "\', " + budget + ", \'" + str(movie['plot'][0]) + "\', \'"+ str(movie["countries"][0]) + "\');\n\n"
+    out = "INSERT\nINTO Media(TitleID, Name, Rating, Budget, Synopsis, Country)\nVALUES(" + movie.movieID + ", \'" + movie['title'] + "\', \'" + str(movie['rating']) + "\', " + budget + ", \'" + movPlot + "\', \'"+ str(movie["countries"][0]) + "\');\n\n"
     file.write(out)
 
     #create the SQL statement to insert genre
@@ -43,11 +46,12 @@ for mov in range(5):
 
 #Insert the crew into people
     #Insert Writer into person
+    contact = str(movie['writer'][0]).replace(" ", "") + "@gmail.com"
     try:
         writerDOB = writer["birth date"]
     except KeyError:
         writerDOB = "NULL"
-    out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['writer'][0]) + "\', " + "\'CONTACT\'" + ", " + writerDOB + ", " + str(0b100) + ");\n\n"
+    out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['writer'][0]) + "\', " + "\'" + contact + "\'" + ", " + writerDOB + ", " + str(0b100) + ");\n\n"
     file.write(out)
 
     #Insert Writer into Wrote
@@ -55,11 +59,12 @@ for mov in range(5):
     file.write(out)    
 
     #Insert Director into Person 
+    contact = str(movie['director'][0]).replace(" ", "") + "@gmail.com"
     try:
         directorDOB = director["birth date"]
     except KeyError:
         directorDOB = "NULL"       
-    out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['director'][0]) + "\', " + "CONTACT" + ", " + directorDOB + ", " + str(0b010) + ");\n\n"
+    out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['director'][0]) + "\', " + contact + ", " + directorDOB + ", " + str(0b010) + ");\n\n"
     file.write(out)
 
     #Insert Director into Directed
@@ -71,11 +76,12 @@ for mov in range(5):
         actor = ia.get_person(cast[i].personID)
 
         #Insert Actor into Person
+        contact = str(cast[i]).replace(" ", "") + "@gmail.com"
         try:
             actorDOB = actor["birth date"]
         except KeyError:
             actorDOB = "NULL"  
-        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(cast[i]) + "\', " + "\'CONTACT\'" + ", " + actorDOB + ", " + str(0b001) + ");\n\n"
+        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(cast[i]) + "\', " + "\'" + contact + "\'" + ", " + actorDOB + ", " + str(0b001) + ");\n\n"
         file.write(out)
 
         #Insert Actor into Acted
@@ -91,12 +97,15 @@ for mov in range(5):
     director = ia.get_person(movie['director'][0].personID)
     cast = (movie['cast'])
 
+    #create a plot variable to remove ' from the plot variable
+    movPlot = str(movie['plot'][0]).replace("'", "''")
+    
     #Create the SQL statement to insert into media
     try:
         budget = ''.join(c for c in movie['box office']['Budget'] if c.isnumeric())
     except KeyError:
         budget = 'NULL'
-    out = "INSERT\nINTO Media(TitleID, Name, Rating, Budget, Synopsis, Country)\nVALUES(" + movie.movieID + ", \'" + movie['title'] + "\', \'" + str(movie['rating']) + "\', " + budget + ", \'" + str(movie['plot'][0]) + "\', \'"+ str(movie["countries"][0]) + "\');\n\n"
+    out = "INSERT\nINTO Media(TitleID, Name, Rating, Budget, Synopsis, Country)\nVALUES(" + movie.movieID + ", \'" + movie['title'] + "\', \'" + str(movie['rating']) + "\', " + budget + ", \'" + movPlot + "\', \'"+ str(movie["countries"][0]) + "\');\n\n"
     file.write(out)
 
     #create the SQL statement to insert genre
@@ -115,11 +124,12 @@ for mov in range(5):
 
 #Insert the crew into people
     #Insert WRiter into person
+    contact = str(movie['writer'][0]).replace(" ", "") + "@gmail.com"
     try:
         writerDOB = writer["birth date"]
     except KeyError:
         writerDOB = "NULL"
-    out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['writer'][0]) + "\', " + "\'CONTACT\'" + ", " + writerDOB + ", " + str(0b100) + ");\n\n"
+    out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['writer'][0]) + "\', " + "\'" + contact + "\'" + ", " + writerDOB + ", " + str(0b100) + ");\n\n"
     file.write(out)
 
     #Insert Writer into Wrote
@@ -127,11 +137,12 @@ for mov in range(5):
     file.write(out)    
 
     #Insert Director into Person 
+    contact = str(movie['director'][0]).replace(" ", "") + "@gmail.com"
     try:
         directorDOB = director["birth date"]
     except KeyError:
         directorDOB = "NULL"        
-    out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['director'][0]) + "\', " + "\'CONTACT\'" + ", " + directorDOB + ", " + str(0b010) + ");\n\n"
+    out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['director'][0]) + "\', " + "\'" + contact + "\'" + ", " + directorDOB + ", " + str(0b010) + ");\n\n"
     file.write(out)
 
     #Insert Director into Directed
@@ -143,11 +154,12 @@ for mov in range(5):
         actor = ia.get_person(cast[i].personID)
 
         #Insert Actor into Person
+        contact = str(cast[i]).replace(" ", "") + "@gmail.com"
         try:
             actorDOB = actor["birth date"]
         except KeyError:
             actorDOB = "NULL"
-        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES\'(" + str(cast[i]) + "\', " + "\'CONTACT\'" + ", " + actorDOB + ", " + str(0b001) + ");\n\n"
+        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES\'(" + str(cast[i]) + "\', " + "\'" + contact +"\'" + ", " + actorDOB + ", " + str(0b001) + ");\n\n"
         file.write(out)
 
         #Insert Actor into Acted
@@ -168,9 +180,12 @@ for sho in range(5):
         budget = ''.join(c for c in show['box office']['Budget'] if c.isnumeric())
     except KeyError:
         budget = 'NULL'
+
+    #create a plot variable to remove ' from the plot variable
+    showPlot = str(show['plot'][0]).replace("'", "''")
     
     #Create the SQL statement to insert into table
-    out = "INSERT\nINTO Media(TitleID, Name, Rating, Budget, Synopsis, Country)\nVALUES(" + show.movieID + ", \'" + show['title'] + "\', \'" + str(show['rating']) + "\', " + budget + ", \'" + str(show['plot'][0]) + "\', " + str(show["countries"][0]) + "\')\n\n"
+    out = "INSERT\nINTO Media(TitleID, Name, Rating, Budget, Synopsis, Country)\nVALUES(" + show.movieID + ", \'" + show['title'] + "\', \'" + str(show['rating']) + "\', " + budget + ", \'" + showPlot + "\', " + str(show["countries"][0]) + "\')\n\n"
     file.write(out)
 
     #Create the SQL statement to insert into genre
@@ -188,11 +203,13 @@ for sho in range(5):
     try:
         writer = ia.get_person(show['writer'][0].personID)
 
+        #insert writer into person
+        contact = str(movie['writer'][0]).replace(" ", "") + "@gmail.com"
         try:
             writerDOB = writer["birth date"]
         except KeyError:
             writerDOB = "NULL"
-        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(" + str(show['writer'][0]) + ", " + "CONTACT" + ", " + writerDOB + ", " + str(0b100) + ");\n\n"
+        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(" + str(show['writer'][0]) + ", " + contact + ", " + writerDOB + ", " + str(0b100) + ");\n\n"
         file.write(out)
 
         #Insert Writer into Wrote
@@ -204,8 +221,9 @@ for sho in range(5):
     try:
         director = ia.get_person(show['director'][0].personID)
 
-        #Insert Director into Person        
-        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(" + str(show['director'][0]) + ", " + "CONTACT" + ", " + director['birth date'] + ", " + str(0b010) + ");\n\n"
+        #Insert Director into Person
+        contact = str(movie['director'][0]).replace(" ", "") + "@gmail.com"        
+        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(" + str(show['director'][0]) + ", " + contact + ", " + director['birth date'] + ", " + str(0b010) + ");\n\n"
         file.write(out)
 
         #Insert Director into Directed
@@ -221,7 +239,8 @@ for sho in range(5):
             actor = ia.get_person(cast[i].personID)
 
             #Insert Actor into Person
-            out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(" + str(cast[i]) + ", " + "CONTACT" + ", " + actor['birth date'] + ", " + str(0b001) + ");\n\n"
+            contact = str(cast[i]).replace(" ", "") + "@gmail.com"
+            out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(" + str(cast[i]) + ", " + contact + ", " + actor['birth date'] + ", " + str(0b001) + ");\n\n"
             file.write(out)
 
             #Insert Actor into Acted

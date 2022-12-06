@@ -32,7 +32,7 @@ for mov in range(5):
 
     #create the SQL statement to insert genre
     for genre in movie['genres']:
-        out = "INSERT\nINTO Genre(Genre_MediaID, GenreName)\nVALUES(" + movie.movieID + "," + genre + ");\n\n"
+        out = "INSERT\nINTO Genre(Genre_MediaID, GenreName)\nVALUES(" + movie.movieID + ", \'" + genre + "\');\n\n"
         file.write(out)
 
     #create the SQL statement to insert languages
@@ -41,7 +41,7 @@ for mov in range(5):
         file.write(out)
 
     #create the SQL statement to insert movie
-    out = "INSERT\nINTO Movie(MovieID, Runtime)\nVALUES(" + movie.movieID + "," + ''.join(c for c in movie['runtime'] if c.isnumeric()) + ");\n\n"
+    out = "INSERT\nINTO Movie(MovieID, Runtime)\nVALUES(" + movie.movieID + ", " + ''.join(c for c in movie['runtime'] if c.isnumeric()) + ");\n\n"
     file.write(out)
 
 #Insert the crew into people
@@ -185,12 +185,12 @@ for sho in range(5):
     showPlot = str(show['plot'][0]).replace("'", "''")
     
     #Create the SQL statement to insert into table
-    out = "INSERT\nINTO Media(TitleID, Name, Rating, Budget, Synopsis, Country)\nVALUES(" + show.movieID + ", \'" + show['title'] + "\', \'" + str(show['rating']) + "\', " + budget + ", \'" + showPlot + "\', " + str(show["countries"][0]) + "\')\n\n"
+    out = "INSERT\nINTO Media(TitleID, Name, Rating, Budget, Synopsis, Country)\nVALUES(" + show.movieID + ", \'" + show['title'] + "\', \'" + str(show['rating']) + "\', " + budget + ", \'" + showPlot + "\', \'" + str(show["countries"][0]) + "\')\n\n"
     file.write(out)
 
     #Create the SQL statement to insert into genre
     for genre in movie['genres']:
-        out = "INSERT\nINTO Genre(Genre_MediaID, GenreName)\nVALUES(" + show.movieID + "," + genre + ");\n\n"
+        out = "INSERT\nINTO Genre(Genre_MediaID, GenreName)\nVALUES(" + show.movieID + ", \'" + genre + "\');\n\n"
         file.write(out)
 
     #create the SQL statement to insert languages
@@ -209,11 +209,11 @@ for sho in range(5):
             writerDOB = writer["birth date"]
         except KeyError:
             writerDOB = "NULL"
-        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(" + str(show['writer'][0]) + ", " + contact + ", " + writerDOB + ", " + str(0b100) + ");\n\n"
+        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(show['writer'][0]) + "\', \'" + contact + "\', " + writerDOB + ", " + str(0b100) + ");\n\n"
         file.write(out)
 
         #Insert Writer into Wrote
-        out = "INSERT\nINTO Wrote(Writer_Name, Wrote_MediaID)\nVALUES(" + str(show['writer'][0]) + ", " + show.movieID + ");\n\n"
+        out = "INSERT\nINTO Wrote(Writer_Name, Wrote_MediaID)\nVALUES(\'" + str(show['writer'][0]) + "\', " + show.movieID + ");\n\n"
         file.write(out)    
     except KeyError:
         pass
@@ -223,11 +223,11 @@ for sho in range(5):
 
         #Insert Director into Person
         contact = str(movie['director'][0]).replace(" ", "") + "@gmail.com"        
-        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(" + str(show['director'][0]) + ", " + contact + ", " + director['birth date'] + ", " + str(0b010) + ");\n\n"
+        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(show['director'][0]) + "\', \'" + contact + "\', " + director['birth date'] + ", " + str(0b010) + ");\n\n"
         file.write(out)
 
         #Insert Director into Directed
-        out = "INSERT\nINTO Directed(Director_Name, Directed_MediaID)\nVALUES(" + str(show['director'][0]) + ", " + show.movieID + ");\n\n"
+        out = "INSERT\nINTO Directed(Director_Name, Directed_MediaID)\nVALUES(\'" + str(show['director'][0]) + "\', " + show.movieID + ");\n\n"
         file.write(out)
     except KeyError:
         pass
@@ -240,11 +240,11 @@ for sho in range(5):
 
             #Insert Actor into Person
             contact = str(cast[i]).replace(" ", "") + "@gmail.com"
-            out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(" + str(cast[i]) + ", " + contact + ", " + actor['birth date'] + ", " + str(0b001) + ");\n\n"
+            out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(cast[i]) + "\', \'" + contact + "\', " + actor['birth date'] + ", " + str(0b001) + ");\n\n"
             file.write(out)
 
             #Insert Actor into Acted
-            out = "INSERT\nINTO Acted(Actor_Name, Acted_MediaID)\nVALUES(" + str(cast[i]) + ", " + show.movieID + ");\n\n"
+            out = "INSERT\nINTO Acted(Actor_Name, Acted_MediaID)\nVALUES(\'" + str(cast[i]) + "\', " + show.movieID + ");\n\n"
             file.write(out)
         except KeyError:
             pass

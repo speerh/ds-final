@@ -17,17 +17,27 @@ for mov in range(5):
     director = ia.get_person(movie['director'][0].personID)
     cast = (movie['cast'])
 
+mediaInsert = """
+INSERT INTO MEDIA (TitleID, Name, Rating, Budget, Synopsis, Country)
+VALUES ({titleID}, &sq{name}&sq, &sq{rating}&sq, {budget}, &sq{synopsis}&sq, &sq{country}&sq);
+"""
+
 #create null variables if data isn't found
-    try:
-        budget = ''.join(c for c in movie['box office']['Budget'] if c.isnumeric())
-    except KeyError:
-        budget = 'NULL'
+    budget_nosan = movie.get('box office', {}).get('Budget', 'NULL')
+    budget = ''.join(c for c in budget_nosan if c.isnumeric())
     
     #create a plot variable to remove ' from the plot variable
     movPlot = str(movie['plot'][0]).replace("'", "''")
 
     #Create the SQL statement to insert into media
-    out = "INSERT\nINTO Media(TitleID, Name, Rating, Budget, Synopsis, Country)\nVALUES(" + movie.movieID + ", \'" + movie['title'] + "\', \'" + str(movie['rating']) + "\', " + budget + ", \'" + movPlot + "\', \'"+ str(movie["countries"][0]) + "\');\n\n"
+    out = mediaInsert.format(
+        titleID = movie.movieID,
+        name = movie['title'],
+        rating = str(movie['rating']),
+        budget = budget,
+        synopsis = str(movie['plot'][0]),
+        country = str(movie["countries"][0])
+    ).replace("'", "''").replace('&sq', "'")
     file.write(out)
 
     #create the SQL statement to insert genre

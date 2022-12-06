@@ -13,6 +13,8 @@ print("Fetching top 250 shows")
 topShows = ia.get_top250_tv()
 print("Done!")
 
+def formatEscQuotes(text, *args, **kwargs):
+    return text.replace("'", "&sq;").format(*args, **kwargs).replace("'","''").replace("&sq;","'")
 
 mediaInsert = """
 INSERT
@@ -37,14 +39,16 @@ for mov in range(5):
     movPlot = str(movie['plot'][0]).replace("'", "''")
 
     #Create the SQL statement to insert into media
-    out = mediaInsert.replace("'", "&sq;").format(
+    out = formatEscQuotes(
+        mediaInsert,
         titleID = movie.movieID,
         name = movie['title'],
         rating = str(movie['rating']),
         budget = budget,
         synopsis = str(movie['plot'][0]),
-        country = str(movie["countries"][0])
-    ).replace("'", "''").replace("&sq;", "'")
+        country = str(movie["countries"][0])   
+    )
+    
     file.write(out)
 
     #create the SQL statement to insert genre

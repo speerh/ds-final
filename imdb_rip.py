@@ -61,7 +61,7 @@ VALUES ({titleID}, &sq{name}&sq, &sq{rating}&sq, {budget}, &sq{synopsis}&sq, &sq
         writerDOB = writer["birth date"]
     except KeyError:
         writerDOB = "NULL"
-    out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['writer'][0]) + "\', " + "\'" + contact + "\'" + ", " + writerDOB + ", " + str(0b100) + ");\n\n"
+    out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['writer'][0]) + "\', " + "\'" + contact + "\'" + ", DATE \'" + writerDOB + "\', " + str(0b100) + ");\n\n"
     file.write(out)
 
     #Insert Writer into Wrote
@@ -74,7 +74,7 @@ VALUES ({titleID}, &sq{name}&sq, &sq{rating}&sq, {budget}, &sq{synopsis}&sq, &sq
         directorDOB = director["birth date"]
     except KeyError:
         directorDOB = "NULL"       
-    out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['director'][0]) + "\', " + contact + ", " + directorDOB + ", " + str(0b010) + ");\n\n"
+    out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['director'][0]) + "\', " + contact + ", DATE \'" + directorDOB + "\', " + str(0b010) + ");\n\n"
     file.write(out)
 
     #Insert Director into Directed
@@ -91,7 +91,7 @@ VALUES ({titleID}, &sq{name}&sq, &sq{rating}&sq, {budget}, &sq{synopsis}&sq, &sq
             actorDOB = actor["birth date"]
         except KeyError:
             actorDOB = "NULL"  
-        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(cast[i]) + "\', " + "\'" + contact + "\'" + ", " + actorDOB + ", " + str(0b001) + ");\n\n"
+        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(cast[i]) + "\', " + "\'" + contact + "\'" + ", DATE \'" + actorDOB + "\', " + str(0b001) + ");\n\n"
         file.write(out)
 
         #Insert Actor into Acted
@@ -139,7 +139,7 @@ for mov in range(5):
         writerDOB = writer["birth date"]
     except KeyError:
         writerDOB = "NULL"
-    out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['writer'][0]) + "\', " + "\'" + contact + "\'" + ", " + writerDOB + ", " + str(0b100) + ");\n\n"
+    out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['writer'][0]) + "\', " + "\'" + contact + "\'" + ", DATE \'" + writerDOB + "\', " + str(0b100) + ");\n\n"
     file.write(out)
 
     #Insert Writer into Wrote
@@ -152,7 +152,7 @@ for mov in range(5):
         directorDOB = director["birth date"]
     except KeyError:
         directorDOB = "NULL"        
-    out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['director'][0]) + "\', " + "\'" + contact + "\'" + ", " + directorDOB + ", " + str(0b010) + ");\n\n"
+    out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['director'][0]) + "\', " + "\'" + contact + "\'" + ", DATE \'" + directorDOB + "\', " + str(0b010) + ");\n\n"
     file.write(out)
 
     #Insert Director into Directed
@@ -169,7 +169,7 @@ for mov in range(5):
             actorDOB = actor["birth date"]
         except KeyError:
             actorDOB = "NULL"
-        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES\'(" + str(cast[i]) + "\', " + "\'" + contact +"\'" + ", " + actorDOB + ", " + str(0b001) + ");\n\n"
+        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES\'(" + str(cast[i]) + "\', " + "\'" + contact +"\'" + ", DATE \'" + actorDOB + "\', " + str(0b001) + ");\n\n"
         file.write(out)
 
         #Insert Actor into Acted
@@ -219,7 +219,7 @@ for sho in range(5):
             writerDOB = writer["birth date"]
         except KeyError:
             writerDOB = "NULL"
-        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(show['writer'][0]) + "\', \'" + contact + "\', " + writerDOB + ", " + str(0b100) + ");\n\n"
+        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(show['writer'][0]) + "\', \'" + contact + "\', DATE \'" + writerDOB + "\', " + str(0b100) + ");\n\n"
         file.write(out)
 
         #Insert Writer into Wrote
@@ -233,7 +233,7 @@ for sho in range(5):
 
         #Insert Director into Person
         contact = str(movie['director'][0]).replace(" ", "") + "@gmail.com"        
-        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(show['director'][0]) + "\', \'" + contact + "\', " + director['birth date'] + ", " + str(0b010) + ");\n\n"
+        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(show['director'][0]) + "\', \'" + contact + "\', DATE \'" + director['birth date'] + "\', " + str(0b010) + ");\n\n"
         file.write(out)
 
         #Insert Director into Directed
@@ -250,7 +250,7 @@ for sho in range(5):
 
             #Insert Actor into Person
             contact = str(cast[i]).replace(" ", "") + "@gmail.com"
-            out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(cast[i]) + "\', \'" + contact + "\', " + actor['birth date'] + ", " + str(0b001) + ");\n\n"
+            out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(cast[i]) + "\', \'" + contact + "\', DATE \'" + actor['birth date'] + "\', " + str(0b001) + ");\n\n"
             file.write(out)
 
             #Insert Actor into Acted

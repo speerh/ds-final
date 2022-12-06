@@ -30,7 +30,7 @@ INSERT
 INTO Genre(Genre_MediaID, GenreName)
 VALUES({titleID}, '{genre}');
 
-"""'
+"""
 
 langInsert = """
 INSERT
@@ -124,7 +124,7 @@ for mov in range(5):
     try:
         writerDOB = writer["birth date"]
     except KeyError:
-        writerDOB = "0001-01-01"
+        writerDOB = "NULL"
     out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['writer'][0]) + "\', " + "\'" + contact + "\'" + ", DATE \'" + writerDOB + "\', " + str(0b100) + ");\n\n"
     file.write(out)
 
@@ -137,7 +137,7 @@ for mov in range(5):
     try:
         directorDOB = director["birth date"]
     except KeyError:
-        directorDOB = "0001-01-01"       
+        directorDOB = "NULL"       
     out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['director'][0]) + "\', " + contact + ", DATE \'" + directorDOB + "\', " + str(0b010) + ");\n\n"
     file.write(out)
 
@@ -154,7 +154,7 @@ for mov in range(5):
         try:
             actorDOB = actor["birth date"]
         except KeyError:
-            actorDOB = "0001-01-01"  
+            actorDOB = "NULL"  
         out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(cast[i]) + "\', " + "\'" + contact + "\'" + ", DATE \'" + actorDOB + "\', " + str(0b001) + ");\n\n"
         file.write(out)
 
@@ -202,7 +202,7 @@ for mov in range(5):
     try:
         writerDOB = writer["birth date"]
     except KeyError:
-        writerDOB = "0001-01-01"
+        writerDOB = "NULL"
     out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['writer'][0]) + "\', " + "\'" + contact + "\'" + ", DATE \'" + writerDOB + "\', " + str(0b100) + ");\n\n"
     file.write(out)
 
@@ -215,7 +215,7 @@ for mov in range(5):
     try:
         directorDOB = director["birth date"]
     except KeyError:
-        directorDOB = "0001-01-01"        
+        directorDOB = "NULL"        
     out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(movie['director'][0]) + "\', " + "\'" + contact + "\'" + ", DATE \'" + directorDOB + "\', " + str(0b010) + ");\n\n"
     file.write(out)
 
@@ -232,8 +232,8 @@ for mov in range(5):
         try:
             actorDOB = actor["birth date"]
         except KeyError:
-            actorDOB = "0001-01-01"
-        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(cast[i]) + "\', " + "\'" + contact +"\'" + ", DATE \'" + actorDOB + "\', " + str(0b001) + ");\n\n"
+            actorDOB = "NULL"
+        out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES\'(" + str(cast[i]) + "\', " + "\'" + contact +"\'" + ", DATE \'" + actorDOB + "\', " + str(0b001) + ");\n\n"
         file.write(out)
 
         #Insert Actor into Acted
@@ -282,7 +282,7 @@ for sho in range(5):
         try:
             writerDOB = writer["birth date"]
         except KeyError:
-            writerDOB = "0001-01-01"
+            writerDOB = "NULL"
         out = "INSERT\nINTO Person(PersonName, Contact, DOB, RoleFlags)\nVALUES(\'" + str(show['writer'][0]) + "\', \'" + contact + "\', DATE \'" + writerDOB + "\', " + str(0b100) + ");\n\n"
         file.write(out)
 

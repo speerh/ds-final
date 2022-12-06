@@ -16,12 +16,65 @@ print("Done!")
 def formatEscQuotes(text, *args, **kwargs):
     return text.replace("'", "&sq;").format(*args, **kwargs).replace("'","''").replace("&sq;","'")
 
+#region SQL templates
+
 mediaInsert = """
 INSERT
 INTO MEDIA (TitleID, Name, Rating, Budget, Synopsis, Country)
 VALUES ({titleID}, '{name}', '{rating}', {budget}, '{synopsis}', '{country}');
 
 """
+
+genreInsert = """
+INSERT
+INTO Genre(Genre_MediaID, GenreName)
+VALUES({titleID}, '{genre}');
+
+"""'
+
+langInsert = """
+INSERT
+INTO Languages(Language_MediaID, LanguageName)
+VALUES({titleID}, '{lang}');
+
+"""
+
+movieInsert = """
+INSERT
+INTO Movie(MovieID, Runtime)
+VALUES({titleID}, {runtime});
+
+"""
+
+personInsert = """
+INSERT
+INTO Person(PersonName, Contact, DOB, RoleFlags)
+VALUES('{name}', '{contact}', DATE '{dob}', {roleFlags});
+
+"""
+
+wroteInsert = """
+INSERT
+INTO Wrote(Writer_Name, Wrote_MediaID)
+VALUES('{name}', {titleID});
+
+"""
+
+directedInsert = """
+INSERT
+INTO Directed(Director_Name, Directed_MediaID)
+VALUES('{name}', {titleID});
+
+"""
+
+actedInsert = """
+INSERT
+INTO Acted(Actor_Name, Acted_MediaID)
+VALUES('{name}', {titleID});
+
+"""
+
+#endregion
 
 #Create the SQL statements for the topMovies and Crew
 for mov in range(5):

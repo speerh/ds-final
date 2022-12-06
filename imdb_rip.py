@@ -5,14 +5,20 @@ ia = Cinemagoer()
 file = open("IMDB_input.sql", "w")
 
 #Get the top 250 movies, bottom 100 movies, and top 250 shows respectively
+print("Fetching top 250 movies")
 topMovies = ia.get_top250_movies()
+print("Fetching bottom 100 movies")
 bottomMovies = ia.get_bottom100_movies()
+print("Fetching top 250 shows")
 topShows = ia.get_top250_tv()
+print("Done!")
 
 
 mediaInsert = """
-INSERT INTO MEDIA (TitleID, Name, Rating, Budget, Synopsis, Country)
-VALUES ({titleID}, &sq{name}&sq, &sq{rating}&sq, {budget}, &sq{synopsis}&sq, &sq{country}&sq);
+INSERT
+INTO MEDIA (TitleID, Name, Rating, Budget, Synopsis, Country)
+VALUES ({titleID}, '{name}', '{rating}', {budget}, '{synopsis}', '{country}');
+
 """
 
 #Create the SQL statements for the topMovies and Crew
@@ -31,14 +37,14 @@ for mov in range(5):
     movPlot = str(movie['plot'][0]).replace("'", "''")
 
     #Create the SQL statement to insert into media
-    out = mediaInsert.format(
+    out = mediaInsert.replace("'", "&sq;").format(
         titleID = movie.movieID,
         name = movie['title'],
         rating = str(movie['rating']),
         budget = budget,
         synopsis = str(movie['plot'][0]),
         country = str(movie["countries"][0])
-    ).replace("'", "''").replace('&sq', "'")
+    ).replace("'", "''").replace("&sq;", "'")
     file.write(out)
 
     #create the SQL statement to insert genre

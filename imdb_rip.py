@@ -9,6 +9,12 @@ topMovies = ia.get_top250_movies()
 bottomMovies = ia.get_bottom100_movies()
 topShows = ia.get_top250_tv()
 
+
+mediaInsert = """
+INSERT INTO MEDIA (TitleID, Name, Rating, Budget, Synopsis, Country)
+VALUES ({titleID}, &sq{name}&sq, &sq{rating}&sq, {budget}, &sq{synopsis}&sq, &sq{country}&sq);
+"""
+
 #Create the SQL statements for the topMovies and Crew
 for mov in range(5):
     #Precisely selects the movie, writer, director, and cast
@@ -16,11 +22,6 @@ for mov in range(5):
     writer = ia.get_person(movie['writer'][0].personID)
     director = ia.get_person(movie['director'][0].personID)
     cast = (movie['cast'])
-
-mediaInsert = """
-INSERT INTO MEDIA (TitleID, Name, Rating, Budget, Synopsis, Country)
-VALUES ({titleID}, &sq{name}&sq, &sq{rating}&sq, {budget}, &sq{synopsis}&sq, &sq{country}&sq);
-"""
 
 #create null variables if data isn't found
     budget_nosan = movie.get('box office', {}).get('Budget', 'NULL')

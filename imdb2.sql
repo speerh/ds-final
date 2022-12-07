@@ -15,9 +15,7 @@ DROP TABLE Directed CASCADE CONSTRAINTS;
 DROP TABLE Acted CASCADE CONSTRAINTS;
 DROP TABLE MediaVideo CASCADE CONSTRAINTS;
 DROP TABLE MediaPhoto CASCADE CONSTRAINTS;
-DROP TABLE ActingSample CASCADE CONSTRAINTS;
 DROP TABLE PersonPhoto CASCADE CONSTRAINTS;
-DROP TABLE WritingSample CASCADE CONSTRAINTS;
 
 CREATE TABLE Media (
 TitleID		NUMBER (8) PRIMARY KEY,
@@ -160,24 +158,9 @@ CONSTRAINT MediaPhoto_pk PRIMARY KEY (MP_MediaID, MP_PhotoLink),
 CONSTRAINT MediaPhoto_MediaID_fk FOREIGN KEY (MP_MediaID) REFERENCES Media(TitleID)
 );
 
-CREATE TABLE ActingSample (
-AV_PersonName	VARCHAR2 (32),
-AV_VideoLink	VARCHAR2 (200),
-CONSTRAINT ActingSample_pk PRIMARY KEY (AV_PersonName, AV_VideoLink),
-CONSTRAINT ActingSample_PersonName_fk FOREIGN KEY (AV_PersonName) REFERENCES Person(PersonName)
-);
-
 CREATE TABLE PersonPhoto (
 PP_PersonName	VARCHAR2 (32),
 PP_PhotoLink	VARCHAR2 (200),
 CONSTRAINT PersonPhoto_pk PRIMARY KEY (PP_PersonName, PP_PhotoLink),
 CONSTRAINT PersonPhoto_PersonName_fk FOREIGN KEY (PP_PersonName) REFERENCES Person(PersonName)
-);
-
-CREATE TABLE WritingSample (
-Sample_Writer_Name	VARCHAR2 (32), 
-Sample_Index		NUMBER (3),
-Sample_Writing		VARCHAR2 (4000),
-CONSTRAINT WritingSample_pk PRIMARY KEY (Sample_Writer_Name, Sample_Index),
-CONSTRAINT WritingSample_Writer_Name_fk FOREIGN KEY (Sample_Writer_Name) REFERENCES Person(PersonName)
 );

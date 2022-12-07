@@ -23,19 +23,19 @@ VALUES(167260, 167261);
 --VIEWOPT: ONLY INSERT MEDIA IDS
 
 INSERT INTO ViewOpt(ViewOpt_MediaID, ViewOptName)
-VALUES(ID, 'Netflix');
+VALUES(68646, 'Netflix');
 
 INSERT INTO ViewOpt(ViewOpt_MediaID, ViewOptName)
-VALUES(ID, 'Netflix');
+VALUES(71562, 'Netflix');
 
 INSERT INTO ViewOpt(ViewOpt_MediaID, ViewOptName)
-VALUES(ID, 'Netflix');
+VALUES(167260, 'Netflix');
 
 INSERT INTO ViewOpt(ViewOpt_MediaID, ViewOptName)
-VALUES(ID, 'Netflix');
+VALUES(120737, 'Netflix');
 
 INSERT INTO ViewOpt(ViewOpt_MediaID, ViewOptName)
-VALUES(ID, 'Netflix');
+VALUES(167261, 'Netflix');
 
 --SEASON: INSERT SHOW IDS ONLY-- ONE SEASON PER SHOW ATM
 

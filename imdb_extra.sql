@@ -91,10 +91,10 @@ VALUES('Best Cinematography', 'Academy Awards', 'Best Cinematography', 2002, 120
 --REVIEW: again just copy paste this from the media we have
 
 INSERT INTO Review(Review_MediaID, Reviewer, ReviewDate, ReviewBody, Spoilers, Helpful, Stars, ReviewTitle)
-VALUES();
+VALUES(167261, 'dcastor', DATE '2002-12-18', "I considered The Fellowship of the Ring to be one of the greatest movies ever. This one is better!", 0, 111, 9, "Great One");
 
 INSERT INTO Review(Review_MediaID, Reviewer, ReviewDate, ReviewBody, Spoilers, Helpful, Stars, ReviewTitle)
-VALUES();
+VALUES(120737, 'MR-ODIN', DATE '2020-02-15', "It is my firm belief that the standard versions of The Lord of the Rings should be jettisoned in favour of the extended editions universally. Sure, the near 4 hour runtime is a tad steep, but for an absolute masterpiece like this, it's work every second and the first act of undoubtedly the best trilogy in cinematic history!", 0, 77, 5, "Great");
 
 INSERT INTO Review(Review_MediaID, Reviewer, ReviewDate, ReviewBody, Spoilers, Helpful, Stars, ReviewTitle)
 VALUES();

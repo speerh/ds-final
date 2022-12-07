@@ -1,18 +1,24 @@
 --MORELIKE
 INSERT INTO more_like(ReferenceID, SimilarID)
-VALUES(ID1, ID2);
+VALUES(68646, 71562);
 
 INSERT INTO more_like(ReferenceID, SimilarID)
-VALUES(ID1, ID2);
+VALUES(71562, 68646);
 
 INSERT INTO more_like(ReferenceID, SimilarID)
-VALUES(ID1, ID2);
+VALUES(167260, 120737);
 
 INSERT INTO more_like(ReferenceID, SimilarID)
-VALUES(ID1, ID2);
+VALUES(120737, 167260);
 
 INSERT INTO more_like(ReferenceID, SimilarID)
-VALUES(ID1, ID2);
+VALUES(120737, 167261);
+
+INSERT INTO more_like(ReferenceID, SimilarID)
+VALUES(167261, 167260);
+
+INSERT INTO more_like(ReferenceID, SimilarID)
+VALUES(167260, 167261);
 
 --VIEWOPT: ONLY INSERT MEDIA IDS
 

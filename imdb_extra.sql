@@ -74,19 +74,19 @@ VALUES(ID, 1, 1, 'N/A', DATE '0001-01-01', 30, 'No description given.');
 --AWARD: custom-make these please, jsut pull from the movies we have
 
 INSERT INTO Award(Award_Title, Organization, Category, Year, Award_TitleID, Status)
-VALUES();
+VALUES('Best Picture', 'Academy Awards', 'Best Picture', 1973, 68646, 'Winner');
 
 INSERT INTO Award(Award_Title, Organization, Category, Year, Award_TitleID, Status)
-VALUES();
+VALUES('Best Picture', 'Academy Awards', 'Best Picture', 1975, 71562, 'Winner');
 
 INSERT INTO Award(Award_Title, Organization, Category, Year, Award_TitleID, Status)
-VALUES();
+VALUES('Best Picture', 'Academy Awards', 'Best Picture', 2004, 167260, 'Winner');
 
 INSERT INTO Award(Award_Title, Organization, Category, Year, Award_TitleID, Status)
-VALUES();
+VALUES('Best Sound Editing', 'Academy Awards', 'Best Sound Editing', 2003, 167261, 'Winner');
 
 INSERT INTO Award(Award_Title, Organization, Category, Year, Award_TitleID, Status)
-VALUES();
+VALUES('Best Cinematography', 'Academy Awards', 'Best Cinematography', 2002, 120737, 'Winner');
 
 --REVIEW: again just copy paste this from the media we have
 

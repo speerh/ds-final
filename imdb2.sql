@@ -158,9 +158,3 @@ CONSTRAINT MediaPhoto_pk PRIMARY KEY (MP_MediaID, MP_PhotoLink),
 CONSTRAINT MediaPhoto_MediaID_fk FOREIGN KEY (MP_MediaID) REFERENCES Media(TitleID)
 );
 
-CREATE TABLE PersonPhoto (
-PP_PersonName	VARCHAR2 (32),
-PP_PhotoLink	VARCHAR2 (200),
-CONSTRAINT PersonPhoto_pk PRIMARY KEY (PP_PersonName, PP_PhotoLink),
-CONSTRAINT PersonPhoto_PersonName_fk FOREIGN KEY (PP_PersonName) REFERENCES Person(PersonName)
-);

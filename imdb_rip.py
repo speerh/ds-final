@@ -1,4 +1,5 @@
 from imdb import Cinemagoer
+from datetime import datetime
 
 #Create Cinemagoer Instance and text file to write to in append mode
 ia = Cinemagoer()
@@ -94,6 +95,21 @@ INSERT INTO Acted(Actor_Name, Acted_MediaID)
 VALUES('{name}', {titleID});
 """
 
+tvInsert = """
+INSERT INTO TV_Show(TVID, Start_Date, End_Date)
+VALUES ({titleID}, DATE '{startYear}-01-01', DATE '{endYear}-01-01');
+"""
+
+seasonInsert = """
+INSERT INTO Season(ShowID, Season_No, Name)
+VALUES ({titleID}, {season}, '{name}');
+"""
+
+episodeInsert = """
+INSERT INTO Episode(Ep_ShowID, Ep_Season_No, Episode_No, Ep_Rating, Ep_Air_Date, Ep_Length, Ep_Synopsis)
+VALUES ({titleID}, {season}, {episode}, '{rating}', DATE '{airdate}', {length}, '{synopsis}');
+"""
+
 #endregion
 
 # Create the SQL statements for the topMovies/bottomMovies and Crew
@@ -120,7 +136,7 @@ for mov in topMovies[:5] + bottomMovies[:5]:
         name = movie['title'],
         rating = str(movie['rating']),
         budget = budget,
-        synopsis = str(movie['plot'][0]),
+        synopsis = str(movie['plot'][0])[:500],
         country = str(movie["countries"][0])   
     )
     
@@ -191,7 +207,7 @@ for sho in range(5):
         name = show['title'],
         rating = str(show['rating']),
         budget = budget,
-        synopsis = str(show['plot'][0]),
+        synopsis = str(show['plot'][0])[:500],
         country = str(show["countries"][0])   
     )
     file.write(out)
@@ -241,6 +257,39 @@ for sho in range(5):
             addInvRecord(str(cast[i]), actor, 'acted', show.movieID)
         except KeyError:
             pass
+
+    years = show['series years'].split('-')
+    
+    file.write(formatSanitary(
+        tvInsert,
+        titleID = show.movieID,
+        startYear = years[0],
+        endYear = years[1] if years[1].isnumeric() else "9999"
+        ))
+
+    print('Requesting fine data for S1E1')
+
+    file.write(formatSanitary(
+        seasonInsert,
+        titleID = show.movieID,
+        season = 1,
+        name = 'Season 1'
+        ))
+
+    ep = ia.get_movie(show['episodes'][1][1].movieID)
+
+    file.write(formatSanitary(
+        episodeInsert,
+        titleID = show.movieID,
+        season = 1,
+        episode = 1,
+        rating = ep['rating'],
+        airdate = datetime.strptime(ep['original air date'], '%d %b %Y').strftime('%Y-%m-%d'),
+        length = ep['runtimes'][0],
+        synopsis = ep['plot'][0][:500]
+        ))
+    
+    
 print("Top Shows Written\n")
 
 print("Writing crew records.....")

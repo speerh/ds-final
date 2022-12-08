@@ -51,12 +51,10 @@ WHERE Media.Rating = '9.1';
 SELECT Media.Name 
 FROM Media
 INNER JOIN MediaPhoto ON Media.TitleID=MediaPhoto.MP_MediaID
-WHERE MediaPhoto <> NULL
 UNION
 SELECT Media.Name 
 FROM Media
-INNER JOIN MediaVideo ON Media.TitleID=MediaVideo.MV_MediaID
-WHERE MediaVideo <> NULL;
+INNER JOIN MediaVideo ON Media.TitleID=MediaVideo.MV_MediaID;
 
 --9 select count of ratings
 

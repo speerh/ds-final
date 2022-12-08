@@ -83,7 +83,7 @@ INSERT INTO MediaPhoto(MP_MediaID, MP_PhotoLink)
 VALUES('Breaking Bad', 'https://m.media-amazon.com/images/M/MV5BMjE1OTMwNTA5NV5BMl5BanBnXkFtZTgwMDkzOTA1NjM@._V1_UY100_CR25,0,100,100_AL_.jpg');
 
 INSERT INTO MediaPhoto(MP_MediaID, MP_PhotoLink)
-VALUES('Better Caul Saul', 'https://m.media-amazon.com/images/M/MV5BYjQyNmIyZWMtZDVkMi00OWQ2LTk3NTktYzdjMTc1Zjk3NDg5XkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_UY100_CR25,0,100,100_AL_.jpg');
+VALUES('City of God', 'https://m.media-amazon.com/images/M/MV5BMjQ4MjgyNjAwNl5BMl5BanBnXkFtZTcwMTk2MzA1OQ@@._V1_UY100_CR41,0,100,100_AL_.jpg');
 
 INSERT INTO MediaPhoto(MP_MediaID, MP_PhotoLink)
-VALUES('The Hobbit: An Unexpected Journey', 'https://m.media-amazon.com/images/M/MV5BMTkxMjA5MjI5N15BMl5BanBnXkFtZTcwMTc1Mzg3OA@@._V1_UY100_CR25,0,100,100_AL_.jpg');
+VALUES('Fight Club', 'https://m.media-amazon.com/images/M/MV5BNDY1MzE3MTI0Nl5BMl5BanBnXkFtZTcwNDIwNTI5Mw@@._V1_UY100_CR26,0,100,100_AL_.jpg');

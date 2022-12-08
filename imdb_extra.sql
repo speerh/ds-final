@@ -74,16 +74,33 @@ VALUES(167260, 'auuwws', DATE '2020-9-28', 'Best movie in the trilogy and sealed
 --IMAGES 
 
 INSERT INTO MediaPhoto(MP_MediaID, MP_PhotoLink)
-VALUES('The Godfather Part II', 'https://m.media-amazon.com/images/M/MV5BZTFiODA5NWEtM2FhNC00MWEzLTlkYjgtMWMwNzBhYzlkY2U3XkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_UX100_CR0,0,100,100_AL_.jpg');
+VALUES('71562', 'https://m.media-amazon.com/images/M/MV5BZTFiODA5NWEtM2FhNC00MWEzLTlkYjgtMWMwNzBhYzlkY2U3XkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_UX100_CR0,0,100,100_AL_.jpg');
 
 INSERT INTO MediaPhoto(MP_MediaID, MP_PhotoLink)
-VALUES('The Lord of the Rings: The Return of the King', 'https://m.media-amazon.com/images/M/MV5BNTg3Mzk3NDI0NF5BMl5BanBnXkFtZTcwNDU2MTk2Mw@@._V1_UX100_CR0,0,100,100_AL_.jpg');
+VALUES('167260', 'https://m.media-amazon.com/images/M/MV5BNTg3Mzk3NDI0NF5BMl5BanBnXkFtZTcwNDU2MTk2Mw@@._V1_UX100_CR0,0,100,100_AL_.jpg');
 
 INSERT INTO MediaPhoto(MP_MediaID, MP_PhotoLink)
-VALUES('Breaking Bad', 'https://m.media-amazon.com/images/M/MV5BMjE1OTMwNTA5NV5BMl5BanBnXkFtZTgwMDkzOTA1NjM@._V1_UY100_CR25,0,100,100_AL_.jpg');
+VALUES('903747', 'https://m.media-amazon.com/images/M/MV5BMjE1OTMwNTA5NV5BMl5BanBnXkFtZTgwMDkzOTA1NjM@._V1_UY100_CR25,0,100,100_AL_.jpg');
 
 INSERT INTO MediaPhoto(MP_MediaID, MP_PhotoLink)
-VALUES('City of God', 'https://m.media-amazon.com/images/M/MV5BMjQ4MjgyNjAwNl5BMl5BanBnXkFtZTcwMTk2MzA1OQ@@._V1_UY100_CR41,0,100,100_AL_.jpg');
+VALUES('317248', 'https://m.media-amazon.com/images/M/MV5BMjQ4MjgyNjAwNl5BMl5BanBnXkFtZTcwMTk2MzA1OQ@@._V1_UY100_CR41,0,100,100_AL_.jpg');
 
 INSERT INTO MediaPhoto(MP_MediaID, MP_PhotoLink)
-VALUES('Fight Club', 'https://m.media-amazon.com/images/M/MV5BNDY1MzE3MTI0Nl5BMl5BanBnXkFtZTcwNDIwNTI5Mw@@._V1_UY100_CR26,0,100,100_AL_.jpg');
+VALUES('137523', 'https://m.media-amazon.com/images/M/MV5BNDY1MzE3MTI0Nl5BMl5BanBnXkFtZTcwNDIwNTI5Mw@@._V1_UY100_CR26,0,100,100_AL_.jpg');
+
+-- MEDIA VIDEOS
+
+INSERT INTO MediaVideo(MV_MediaID, MV_VideoLink)
+VALUES('71562', 'https://www.youtube.com/watch?v=mCktxnczyOM');
+
+INSERT INTO MediaVideo(MV_MediaID, MV_VideoLink)
+VALUES('167260', 'https://www.youtube.com/watch?v=r5X-hFf6Bwo');
+
+INSERT INTO MediaVideo(MV_MediaID, MV_VideoLink)
+VALUES('903747', 'https://www.youtube.com/watch?v=HhesaQXLuRY');
+
+INSERT INTO MediaVideo(MV_MediaID, MV_VideoLink)
+VALUES('317248', 'https://www.youtube.com/watch?v=dcUOO4Itgmw');
+
+INSERT INTO MediaVideo(MV_MediaID, MV_VideoLink)
+VALUES('137523', 'https://www.youtube.com/watch?v=qtRKdVHc-cE');

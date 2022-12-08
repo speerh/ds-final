@@ -97,11 +97,11 @@ INSERT INTO Review(Review_MediaID, Reviewer, ReviewDate, ReviewBody, Spoilers, H
 VALUES(120737, 'MR-ODIN', DATE '2020-02-15', "It is my firm belief that the standard versions of The Lord of the Rings should be jettisoned in favour of the extended editions universally. Sure, the near 4 hour runtime is a tad steep, but for an absolute masterpiece like this, it's work every second and the first act of undoubtedly the best trilogy in cinematic history!", 0, 77, 5, "Great");
 
 INSERT INTO Review(Review_MediaID, Reviewer, ReviewDate, ReviewBody, Spoilers, Helpful, Stars, ReviewTitle)
-VALUES();
+VALUES(68646, 'alexkolokotronis', DATE '2008-6-21', 'Tell me a movie that is more famous than this. Tell me a movie that has had more parodies spinned off its storyline than this. Tell me one movie that has been as quoted as a much as this.', 1, 247, 10, 'An Iconic Film');
 
 INSERT INTO Review(Review_MediaID, Reviewer, ReviewDate, ReviewBody, Spoilers, Helpful, Stars, ReviewTitle)
-VALUES();
+VALUES(71562, 'umunir-36959', DATE '2019-8-9', 'One of the all time greats. Or probably the alone greatest thing ever made in the history of cinematography. This movie is both "prequel" and "sequel" of the first godfather movie.', 0, 107, 10, 'A masterpiece that can never be beaten...');
 
 INSERT INTO Review(Review_MediaID, Reviewer, ReviewDate, ReviewBody, Spoilers, Helpful, Stars, ReviewTitle)
-VALUES();
+VALUES(167260, 'auuwws', DATE '2020-9-28', 'Best movie in the trilogy and sealed in the best possible way', 0, 185, 10, 'The best trilogy in the history of cinema');
 

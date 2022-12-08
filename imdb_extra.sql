@@ -105,3 +105,19 @@ VALUES(71562, 'umunir-36959', DATE '2019-8-9', 'One of the all time greats. Or p
 INSERT INTO Review(Review_MediaID, Reviewer, ReviewDate, ReviewBody, Spoilers, Helpful, Stars, ReviewTitle)
 VALUES(167260, 'auuwws', DATE '2020-9-28', 'Best movie in the trilogy and sealed in the best possible way', 0, 185, 10, 'The best trilogy in the history of cinema');
 
+--IMAGES 
+
+INSERT INTO MediaPhoto(MP_MediaID, MP_PhotoLink)
+VALUES('The Godfather Part II', 'https://m.media-amazon.com/images/M/MV5BZTFiODA5NWEtM2FhNC00MWEzLTlkYjgtMWMwNzBhYzlkY2U3XkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_UX100_CR0,0,100,100_AL_.jpg');
+
+INSERT INTO MediaPhoto(MP_MediaID, MP_PhotoLink)
+VALUES('The Lord of the Rings: The Return of the King', 'https://m.media-amazon.com/images/M/MV5BNTg3Mzk3NDI0NF5BMl5BanBnXkFtZTcwNDU2MTk2Mw@@._V1_UX100_CR0,0,100,100_AL_.jpg');
+
+INSERT INTO MediaPhoto(MP_MediaID, MP_PhotoLink)
+VALUES('Breaking Bad', 'https://m.media-amazon.com/images/M/MV5BMjE1OTMwNTA5NV5BMl5BanBnXkFtZTgwMDkzOTA1NjM@._V1_UY100_CR25,0,100,100_AL_.jpg');
+
+INSERT INTO MediaPhoto(MP_MediaID, MP_PhotoLink)
+VALUES('Better Caul Saul', 'https://m.media-amazon.com/images/M/MV5BYjQyNmIyZWMtZDVkMi00OWQ2LTk3NTktYzdjMTc1Zjk3NDg5XkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_UY100_CR25,0,100,100_AL_.jpg');
+
+INSERT INTO MediaPhoto(MP_MediaID, MP_PhotoLink)
+VALUES('The Hobbit: An Unexpected Journey', 'https://m.media-amazon.com/images/M/MV5BMTkxMjA5MjI5N15BMl5BanBnXkFtZTcwMTc1Mzg3OA@@._V1_UY100_CR25,0,100,100_AL_.jpg');

@@ -48,16 +48,14 @@ WHERE Media.Rating = '9.1';
 
 --8 join media and movie and show info from both
 
-SELECT Media.Name, 
+SELECT Media.Name 
 FROM Media
-INNER JOIN MediaPhoto ON Media.ID=MediaPhoto.MP_MediaID
+INNER JOIN MediaPhoto ON Media.TitleID=MediaPhoto.MP_MediaID
 WHERE MediaPhoto <> NULL
-
 UNION
-
-SELECT Media.Name, 
+SELECT Media.Name 
 FROM Media
-INNER JOIN MediaVideo ON Media.ID=MediaVideo.MV_MediaID
+INNER JOIN MediaVideo ON Media.TitleID=MediaVideo.MV_MediaID
 WHERE MediaVideo <> NULL;
 
 --9 select count of ratings

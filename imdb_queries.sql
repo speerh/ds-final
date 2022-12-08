@@ -28,27 +28,23 @@ INNER JOIN Media ON More_Like.SimilarID=Media.TitleID;
 SELECT Person.PersonName, Media.Name
 FROM Person
 INNER JOIN Directed ON Person.PersonName=Directed.Director_Name
-INNER JOIN Media ON Directed.Directed_MediaID=Media.ID
+INNER JOIN Media ON Directed.Directed_MediaID=Media.TitleID;
 
 --retrieve basic info about an entry
 
 SELECT Media.Name, Genre.GenreName, Languages.LanguageName, ViewOpt.ViewOpt_MediaID
 FROM Media
-INNER JOIN Genre ON Media.ID=Genre=Genre_MediaID
-INNER JOIN Languages ON Media.ID=Languages.Language_MediaID
-INNER JOIN ViewOpt ON Media.ID=ViewOpt.ViewOpt_MediaID;
+INNER JOIN Genre ON Media.TitleID=Genre.Genre_MediaID
+INNER JOIN Languages ON Media.TitleID=Languages.Language_MediaID
+INNER JOIN ViewOpt ON Media.TitleID=ViewOpt.ViewOpt_MediaID;
 
 --7 show media rated 9.0 or 1.0
 
-SELECT Media.Name
-From MEDIA
+SELECT Media.Name, Media.Rating FROM Media
 WHERE Media.Rating = '9.0'
-
 UNION
-
-SELECT Media.Name
-From MEDIA
-WHERE Media.Rating = '1.0';
+SELECT Media.Name, Media.Rating FROM Media
+WHERE Media.Rating = '9.1';
 
 --8 join media and movie and show info from both
 
@@ -66,7 +62,7 @@ WHERE MediaVideo <> NULL;
 
 --9 select count of ratings
 
-SELECT COUNT(Media.Rating)
+SELECT Media.Rating, COUNT(Media.Rating)
 FROM Media
 GROUP BY Media.Rating
 ORDER BY COUNT(Media.Rating) DESC;
@@ -75,7 +71,7 @@ ORDER BY COUNT(Media.Rating) DESC;
 
 --10 select count of directed per person
 
-SELECT COUNT(Directed.Director_Name)
+SELECT Directed.Director_Name, COUNT(Directed.Director_Name)
 FROM Directed
 GROUP BY Directed.Director_Name
-ORDER BY COUNT(Directed.Director_Name);
+ORDER BY COUNT(Directed.Director_Name) DESC;
